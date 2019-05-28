@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>层级轮播图</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.box{
+				width: 650px;
+				height: 250px;
+				margin: 100px auto;
+				position: relative;
+				overflow: hidden;
+			}
+			ul,ol{
+				list-style: none;
+			}
+			img{
+				vertical-align: top;
+			}
+			.box ul{
+				position: relative;
+				z-index: 1;
+			}
+			.box ul li{
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			.box ol{
+				position: absolute;
+				bottom: 5px;
+				right: 10px;
+				z-index: 2;
+			}
+			.box ol li{
+				width: 20px;
+				height: 20px;
+				border: 1px solid white;
+				background-color: coral;
+				color: black;
+				float: left;
+				text-align: center;
+				margin-left: 10px;
+				line-height: 20px;
+				cursor: pointer;
+			}
+			.box ol li.current{
+				padding: 2px;
+				margin-top: -4px;
+				background-color: orangered;
+				color: white;
+			}
+		</style>
+		<script type="text/javascript" src="../js/jquery-3.1.1.min.js" ></script>
+		<script type="text/javascript">
+			$(function(){
+				var zIndex=0;
+				$(".box > ol > li").mouseenter(function(){
+					zIndex++;
+					$(".box > ul > li").eq($(this).index())
+					.css({
+						"left":"650px",
+						"z-index":zIndex
+					})
+					.stop()
+					.animate({
+						"left":0
+					},1000);
+					$(this).addClass("current")
+					.siblings("li")
+					.removeClass("current")
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<!--<div class="box">
+			<ul>
+				<li><img src="img/01.jpg" /> </li>
+				<li><img src="img/02.jpg" /> </li>
+				<li><img src="img/03.jpg" /> </li>
+				<li><img src="img/04.jpg" /> </li>
+				<li><img src="img/05.jpg" /> </li>
+			</ul>
+			<ol>
+				<li class="current">1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</ol>
+		</div>-->
+		<div class="box">
+			<ul>
+				<li><img src="img/01.jpg"/></li>
+				<li><img src="img/02.jpg"/></li>
+				<li><img src="img/03.jpg"/></li>
+				<li><img src="img/04.jpg"/></li>
+				<li><img src="img/05.jpg"/></li>
+			</ul>
+			<ol>
+				<li class="current">1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</ol>
+		</div>
+	</body>
+</html>
